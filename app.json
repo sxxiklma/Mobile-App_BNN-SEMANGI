@@ -1,0 +1,40 @@
+{
+  "expo": {
+    "name": "BNN App",
+    "slug": "bnn-app-react-native",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/logo_bnn.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/logo_bnn.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#1E40AF"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.bnn.app"
+    },
+    "android": {
+      "package": "com.bnn.app",
+      "versionCode": 1,
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/logo_bnn.png",
+        "backgroundColor": "#1E40AF"
+      }
+    },
+    "plugins": [
+      "expo-router"
+    ],
+    "scheme": "bnnapp",
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "bc9b3281-6fdc-4517-842e-289677fd862b"
+      }
+    }
+  }
+}

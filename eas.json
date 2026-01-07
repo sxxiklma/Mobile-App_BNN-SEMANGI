@@ -1,0 +1,32 @@
+{
+  "cli": {
+    "version": ">= 7.1.0",
+    "appVersionSource": "remote"
+  },
+  "build": {
+    "development": {
+      "developmentClient": true,
+      "distribution": "internal",
+      "node": "20.19.4"
+    },
+    "preview": {
+      "distribution": "internal",
+      "android": {
+        "buildType": "apk"
+      },
+      "node": "20.19.4",
+      "env": {
+        "NODE_OPTIONS": "--max-old-space-size=4096"
+      }
+    },
+    "production": {
+      "android": {
+        "buildType": "apk"
+      },
+      "node": "20.11.1"
+    }
+  },
+  "submit": {
+    "production": {}
+  }
+}
