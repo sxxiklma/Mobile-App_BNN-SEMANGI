@@ -53,7 +53,7 @@ const AdminProfile = () => {
             />
           </TouchableOpacity>
           <View style={styles.cityContainer}>
-            <Text style={styles.cityText}>KOTA{'\n'}SURABAYA</Text>
+            <Text style={styles.cityText}>KOTA{'\n'}SURABAYAA</Text>
           </View>
           <View style={styles.userChip}>
             <Text style={styles.userChipText}>{firstName}</Text>
