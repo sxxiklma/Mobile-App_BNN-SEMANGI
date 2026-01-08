@@ -1,3 +1,4 @@
+import { PHOTO_URLS } from '../config/photoUrls';
 
 export const lembagaData = [
   {
@@ -10,7 +11,9 @@ export const lembagaData = [
     alamat: 'Jl. Ngagel Madya II / 9 Surabaya',
     pic: 'Fendi H',
     email: 'rumahkitasby86@gmail.com',
-    foto: require('../assets/yayasan_rumah_kita.jpeg'),
+    foto: PHOTO_URLS.YAYASAN_RUMAH_KITA_JPEG,
+    kapasitas: 28,
+    terisi: 15,
   },
   {
     id: 2,
@@ -22,7 +25,9 @@ export const lembagaData = [
     alamat: 'Jl. Margorejo Indah Utara Blok B-922 Margorejo, Surabaya',
     pic: 'Munib',
     email: 'orbit.foundation@yahoo.com',
-    foto: require('../assets/yayasan_orbit.jpeg'),
+    foto: PHOTO_URLS.YAYASAN_ORBIT_JPEG,
+    kapasitas: 104,
+    terisi: 68,
   },
   {
     id: 3,
@@ -34,7 +39,9 @@ export const lembagaData = [
     alamat: 'Jalan Cipta Menanggal V No. 16, Surabaya 60234',
     pic: 'Dita Amalia',
     email: 'plato.found@gmail.com',
-    foto: require('../assets/yayasan_plato_surabaya.jpeg'),
+    foto: PHOTO_URLS.YAYASAN_PLATO_SURABAYA_JPEG,
+    kapasitas: 24,
+    terisi: 20,
   },
   {
     id: 4,
@@ -46,7 +53,9 @@ export const lembagaData = [
     alamat: 'Jl. Khairil Anwar 23 Surabaya',
     pic: 'Drs. Siswanto',
     email: 'pantilrppnsurabaya@gmail.com',
-    foto: require('../assets/yayasan_lrppn.jpeg'),
+    foto: PHOTO_URLS.YAYASAN_LRPPN_JPEG,
+    kapasitas: 75,
+    terisi: 42,
   },
   {
     id: 5,
@@ -58,7 +67,9 @@ export const lembagaData = [
     alamat: 'Jl. Rungkut Menanggal Blok X-19 Rt.009 Rw. 004 Kel. Rungkut Menanggal Kec. Gunung Anyar Kota Surabaya',
     pic: 'Zulfikar Sharif',
     email: 'Mako2rungkut@gmail.com',
-    foto: require('../assets/yayasan_rumah_merah_putih_2.jpg'),
+    foto: PHOTO_URLS.YAYASAN_RUMAH_MERAH_PUTIH_2_JPG,
+    kapasitas: 125,
+    terisi: 88,
   },
   {
     id: 6,
@@ -70,7 +81,9 @@ export const lembagaData = [
     alamat: 'Jl Kutisari XIA no 1 RT 08 RW 05 Surabaya',
     pic: 'Jimmy',
     email: 'fpratiwisuryaningrums@gmail.com',
-    foto: require('../assets/yayasan_ashefa_griya_pusaka.jpeg'),
+    foto: PHOTO_URLS.YAYASAN_ASHEFA_GRIYA_PUSAKA_JPEG,
+    kapasitas: 50,
+    terisi: 35,
   },
   {
     id: 7,
@@ -82,7 +95,9 @@ export const lembagaData = [
     alamat: 'Jl. Raya Menur No. 120 Surabaya',
     pic: 'Diyah',
     email: 'rsj.menur@gmail.com',
-    foto: require('../assets/rs_menur.jpeg'),
+    foto: PHOTO_URLS.RS_MENUR_JPEG,
+    kapasitas: 44,
+    terisi: 39,
   },
   {
     id: 8,
@@ -94,7 +109,9 @@ export const lembagaData = [
     alamat: 'Jl. ngagel Madya V no. 22 Surabaya',
     pic: 'dr. singgih',
     email: 'rehab.bnnksby@gmail.com',
-    foto: require('../assets/klinik_pratama1.jpg'),
+    foto: PHOTO_URLS.KLINIK_PRATAMA1_JPG,
+    kapasitas: 100,
+    terisi: 62,
   },
   {
     id: 9,
@@ -106,7 +123,9 @@ export const lembagaData = [
     alamat: 'Ruko No. 31-32, Jl. Jemur Andayani No. 50',
     pic: 'Farita Sari D.',
     email: 'omahsehatbersinarosb@gmail.com',
-    foto: require('../assets/yayasan_omah_sehat_bersinar.jpeg'),
+    foto: PHOTO_URLS.YAYASAN_OMAH_SEHAT_BERSINAR_JPEG,
+    kapasitas: 60,
+    terisi: 45,
   },
   {
     id: 10,
@@ -118,7 +137,9 @@ export const lembagaData = [
     alamat: 'Jl. Lidah Wetan, Lidah Wetan, Kec. Lakarsantri, Surabaya',
     pic: 'Wiryo Nuryono',
     email: 'smccu@unesa.ac.id',
-    foto: require('../assets/smcc_unesa.jpeg'),
+    foto: PHOTO_URLS.SMCC_UNESA_JPEG,
+    kapasitas: 10,
+    terisi: 7,
   },
 ];
 

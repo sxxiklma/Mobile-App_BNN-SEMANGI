@@ -1,83 +1,73 @@
 import React from 'react';
-import {
-  Box,
-  VStack,
-  HStack,
-  Text,
-  Image,
-  Pressable,
-} from '@gluestack-ui/themed';
+import { View, StyleSheet, Image, Text, TouchableOpacity } from 'react-native';
 import { AppColors } from '../constants/AppColors';
 
 const LembagaCard = ({ nama, alamat, telepon, foto, onPress }) => {
   return (
-    <Pressable onPress={onPress}>
-      <Box
-        bg="$white"
-        borderRadius="$2xl"
-        overflow="hidden"
-        mb="$4"
-        sx={{
-          shadowColor: AppColors.black,
-          shadowOffset: { width: 0, height: 2 },
-          shadowOpacity: 0.1,
-          shadowRadius: 8,
-          elevation: 4,
-        }}
-      >
-        <HStack space="md" p="$4" alignItems="center">
-          {}
-          <Box
-            borderRadius="$lg"
-            overflow="hidden"
-            w={80}
-            h={80}
-          >
-            <Image
-              source={foto}
-              alt={nama}
-              style={{
-                width: 80,
-                height: 80,
-              }}
-              resizeMode="cover"
-            />
-          </Box>
-
-          {}
-          <VStack flex={1} space="xs">
-            {}
-            <Text
-              fontSize="$md"
-              fontWeight="$bold"
-              color={AppColors.textPrimary}
-              numberOfLines={2}
-            >
-              {nama}
-            </Text>
-
-            {}
-            <Text
-              fontSize="$xs"
-              color={AppColors.textSecondary}
-              numberOfLines={2}
-            >
-             {alamat}
-            </Text>
-
-            {}
-            <Text
-              fontSize="$xs"
-              color={AppColors.buttonMasyarakat}
-              fontWeight="$medium"
-            >
-              {telepon}
-            </Text>
-          </VStack>
-        </HStack>
-      </Box>
-    </Pressable>
+    <TouchableOpacity style={styles.card} onPress={onPress} activeOpacity={0.8}>
+      <View style={styles.container}>
+        <Image 
+          source={foto}
+          style={styles.image}
+          resizeMode="cover"
+        />
+        <View style={styles.content}>
+          <Text style={styles.title} numberOfLines={2}>
+            {nama}
+          </Text>
+          <Text style={styles.address} numberOfLines={2}>
+            📍 {alamat}
+          </Text>
+          <Text style={styles.phone}>
+            📞 {telepon}
+          </Text>
+        </View>
+      </View>
+    </TouchableOpacity>
   );
 };
+
+const styles = StyleSheet.create({
+  card: {
+    marginBottom: 16,
+    backgroundColor: 'white',
+    borderRadius: 16,
+    padding: 16,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 8,
+    elevation: 4,
+  },
+  container: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  image: {
+    width: 80,
+    height: 80,
+    borderRadius: 12,
+  },
+  content: {
+    flex: 1,
+    marginLeft: 12,
+  },
+  title: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: AppColors.textPrimary,
+    marginBottom: 4,
+  },
+  address: {
+    fontSize: 14,
+    color: AppColors.textSecondary,
+    marginBottom: 4,
+  },
+  phone: {
+    fontSize: 14,
+    color: AppColors.buttonMasyarakat,
+    fontWeight: '600',
+  },
+});
 
 export default LembagaCard;

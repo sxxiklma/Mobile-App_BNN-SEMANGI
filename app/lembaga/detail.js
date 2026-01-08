@@ -1,21 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import {
-  Box,
-  VStack,
-  HStack,
-  Text,
-  Heading,
-  ScrollView,
-  Pressable,
-  Image,
-  Button,
-  ButtonText,
-  Divider,
-} from '@gluestack-ui/themed';
+import { ScrollView, Linking, View, StyleSheet, TouchableOpacity, Image, Text } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter, useLocalSearchParams } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
-import { Linking } from 'react-native';
 import { AppColors } from '../../constants/AppColors';
 import { getAllLembaga } from '../../services/lembagaService';
 
@@ -42,151 +29,222 @@ const DetailLembagaScreen = () => {
 
   if (!lembaga) {
     return (
-      <Box flex={1} bg={AppColors.backgroundBlue}>
+      <View style={{ flex: 1 }}>
         <StatusBar style="light" />
-      </Box>
+      </View>
     );
   }
 
-  const InfoRow = ({ label, value, color = AppColors.textSecondary }) => (
-    <HStack alignItems="flex-start" space="sm" mb="$3">
-      <Text fontSize="$md" color={AppColors.textPrimary} fontWeight="$semibold" w={140}>
-        {label}
-      </Text>
-      <Text fontSize="$md" color={color} flex={1}>
-        {value}
-      </Text>
-    </HStack>
-  );
-
   return (
-    <Box flex={1}>
+    <View style={{ flex: 1 }}>
       <StatusBar style="light" />
       <LinearGradient
         colors={[AppColors.backgroundBlue, AppColors.primaryDark]}
         style={{ flex: 1 }}
       >
-        <ScrollView flex={1}>
-          <Box px="$5" pt="$16" pb="$10">
-            {}
-            <HStack alignItems="center" mb="$6">
-              <Pressable onPress={() => router.back()} mr="$4">
-                <Text fontSize="$2xl" color="$white">
-                
-                </Text>
-              </Pressable>
-              <Heading size="xl" color="$white" flex={1}>
-                Detail Lembaga
-              </Heading>
-            </HStack>
+        <ScrollView>
+          <View style={styles.container}>
+            <View style={styles.header}>
+              <TouchableOpacity onPress={() => router.back()} style={styles.backButton}>
+                <Text style={styles.backText}>←</Text>
+              </TouchableOpacity>
+              <Text style={styles.headerTitle}>Detail Lembaga</Text>
+            </View>
 
-            {}
-            <Box
-              bg={AppColors.surface}
-              borderRadius="$3xl"
-              overflow="hidden"
-              sx={{
-                shadowColor: AppColors.black,
-                shadowOffset: { width: 0, height: 8 },
-                shadowOpacity: 0.1,
-                shadowRadius: 16,
-                elevation: 8,
-              }}
-            >
-              {}
+            <View style={styles.card}>
               <Image
                 source={lembaga.foto}
-                alt={lembaga.nama}
-                style={{
-                  width: '100%',
-                  height: 250,
-                }}
+                style={styles.image}
                 resizeMode="cover"
               />
+              
+              <View style={styles.content}>
+                <Text style={styles.title}>{lembaga.nama}</Text>
 
-              {}
-              <VStack p="$6" space="md">
-                {}
-                <Heading size="xl" color={AppColors.textPrimary}>
-                  {lembaga.nama}
-                </Heading>
+                <View style={styles.divider} />
 
-                <Divider bg={AppColors.textSecondary} opacity={0.2} />
+                {/* Contact Info */}
+                <View style={styles.section}>
+                  <Text style={styles.sectionTitle}>📞 Informasi Kontak</Text>
+                  <View style={styles.row}>
+                    <Text style={styles.label}>Telepon:</Text>
+                    <TouchableOpacity onPress={() => handleCallPress(lembaga.telepon)}>
+                      <Text style={styles.linkText}>{lembaga.telepon}</Text>
+                    </TouchableOpacity>
+                  </View>
+                  <View style={styles.row}>
+                    <Text style={styles.label}>Email:</Text>
+                    <TouchableOpacity onPress={() => handleEmailPress(lembaga.email)}>
+                      <Text style={styles.linkText}>{lembaga.email}</Text>
+                    </TouchableOpacity>
+                  </View>
+                  <View style={styles.row}>
+                    <Text style={styles.label}>PIC:</Text>
+                    <Text style={styles.value}>{lembaga.pic}</Text>
+                  </View>
+                </View>
 
-                {}
-                <VStack space="xs">
-                  <Text fontSize="$lg" fontWeight="$bold" color={AppColors.textPrimary} mb="$2">
-                     Informasi Kontak
-                  </Text>
-                  
-                  <InfoRow label="Telepon:" value={lembaga.telepon} color={AppColors.buttonMasyarakat} />
-                  <InfoRow label="Email:" value={lembaga.email} color={AppColors.buttonMasyarakat} />
-                  <InfoRow label="PIC:" value={lembaga.pic} />
-                </VStack>
+                <View style={styles.divider} />
 
-                <Divider bg={AppColors.textSecondary} opacity={0.2} />
+                {/* Address */}
+                <View style={styles.section}>
+                  <Text style={styles.sectionTitle}>📍 Alamat</Text>
+                  <Text style={styles.value}>{lembaga.alamat}</Text>
+                </View>
 
-                {}
-                <VStack space="xs">
-                  <Text fontSize="$lg" fontWeight="$bold" color={AppColors.textPrimary} mb="$2">
-                    Alamat
-                  </Text>
-                  <Text fontSize="$md" color={AppColors.textSecondary}>
-                    {lembaga.alamat}
-                  </Text>
-                </VStack>
+                <View style={styles.divider} />
 
-                <Divider bg={AppColors.textSecondary} opacity={0.2} />
-
-                {}
-                <VStack space="xs">
-                  <Text fontSize="$lg" fontWeight="$bold" color={AppColors.textPrimary} mb="$2">
-                    Kapasitas Layanan
-                  </Text>
-                  
-                  <InfoRow label="Pria:" value={`${lembaga.kapasitas_pria} orang`} />
-                  <InfoRow label="Wanita:" value={`${lembaga.kapasitas_wanita} orang`} />
-                  <InfoRow label="Rawat Jalan:" value={`${lembaga.kapasitas_rawat_jalan} orang`} />
-                  
-                  <Box mt="$2" bg={AppColors.buttonLembaga} p="$3" borderRadius="$xl">
-                    <Text fontSize="$md" color="$white" fontWeight="$bold" textAlign="center">
+                {/* Capacity */}
+                <View style={styles.section}>
+                  <Text style={styles.sectionTitle}>🏥 Kapasitas Layanan</Text>
+                  <View style={styles.row}>
+                    <Text style={styles.label}>Pria:</Text>
+                    <Text style={styles.value}>{lembaga.kapasitas_pria} orang</Text>
+                  </View>
+                  <View style={styles.row}>
+                    <Text style={styles.label}>Wanita:</Text>
+                    <Text style={styles.value}>{lembaga.kapasitas_wanita} orang</Text>
+                  </View>
+                  <View style={styles.row}>
+                    <Text style={styles.label}>Rawat Jalan:</Text>
+                    <Text style={styles.value}>{lembaga.kapasitas_rawat_jalan} orang</Text>
+                  </View>
+                  <View style={styles.badge}>
+                    <Text style={styles.badgeText}>
                       Total Kapasitas: {lembaga.kapasitas_pria + lembaga.kapasitas_wanita + lembaga.kapasitas_rawat_jalan} orang
                     </Text>
-                  </Box>
-                </VStack>
+                  </View>
+                </View>
 
-                {}
-                <VStack space="md" mt="$4">
-                  <Button
-                    size="lg"
-                    bg={AppColors.buttonMasyarakat}
-                    borderRadius="$2xl"
+                {/* Action Buttons */}
+                <View style={styles.buttonContainer}>
+                  <TouchableOpacity
+                    style={[styles.button, { backgroundColor: AppColors.buttonMasyarakat }]}
                     onPress={() => handleCallPress(lembaga.telepon)}
                   >
-                    <ButtonText fontWeight="$semibold">
-                      Hubungi Sekarang
-                    </ButtonText>
-                  </Button>
-
-                  <Button
-                    size="lg"
-                    variant="outline"
-                    borderColor={AppColors.buttonMasyarakat}
-                    borderRadius="$2xl"
+                    <Text style={styles.buttonText}>📞 Hubungi Sekarang</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    style={[styles.button, styles.outlineButton]}
                     onPress={() => handleEmailPress(lembaga.email)}
                   >
-                    <ButtonText fontWeight="$semibold" color={AppColors.buttonMasyarakat}>
-                       Kirim Email
-                    </ButtonText>
-                  </Button>
-                </VStack>
-              </VStack>
-            </Box>
-          </Box>
+                    <Text style={[styles.buttonText, { color: AppColors.buttonMasyarakat }]}>✉️ Kirim Email</Text>
+                  </TouchableOpacity>
+                </View>
+              </View>
+            </View>
+          </View>
         </ScrollView>
       </LinearGradient>
-    </Box>
+    </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    padding: 16,
+  },
+  header: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 16,
+  },
+  backButton: {
+    padding: 8,
+  },
+  backText: {
+    color: 'white',
+    fontSize: 32,
+  },
+  headerTitle: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    color: 'white',
+    marginLeft: 8,
+  },
+  card: {
+    backgroundColor: 'white',
+    borderRadius: 16,
+    overflow: 'hidden',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 8,
+    elevation: 4,
+  },
+  image: {
+    width: '100%',
+    height: 250,
+  },
+  content: {
+    padding: 20,
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: AppColors.textPrimary,
+  },
+  divider: {
+    height: 1,
+    backgroundColor: '#e0e0e0',
+    marginVertical: 16,
+  },
+  section: {
+    marginBottom: 8,
+  },
+  sectionTitle: {
+    fontSize: 18,
+    fontWeight: '600',
+    color: AppColors.textPrimary,
+    marginBottom: 8,
+  },
+  row: {
+    flexDirection: 'row',
+    marginBottom: 8,
+  },
+  label: {
+    fontWeight: 'bold',
+    width: 120,
+    color: '#333',
+  },
+  value: {
+    flex: 1,
+    color: AppColors.textSecondary,
+  },
+  linkText: {
+    flex: 1,
+    color: AppColors.buttonMasyarakat,
+  },
+  badge: {
+    backgroundColor: AppColors.buttonLembaga,
+    padding: 12,
+    borderRadius: 8,
+    marginTop: 12,
+  },
+  badgeText: {
+    color: 'white',
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+  buttonContainer: {
+    marginTop: 16,
+    gap: 12,
+  },
+  button: {
+    padding: 16,
+    borderRadius: 25,
+    alignItems: 'center',
+  },
+  outlineButton: {
+    backgroundColor: 'transparent',
+    borderWidth: 2,
+    borderColor: AppColors.buttonMasyarakat,
+  },
+  buttonText: {
+    color: 'white',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+});
 
 export default DetailLembagaScreen;

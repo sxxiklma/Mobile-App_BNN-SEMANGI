@@ -1,0 +1,18 @@
+{
+  "rules": {
+    "users": {
+      "$uid": {
+        ".read": true,
+        ".write": true
+      }
+    },
+    "pengajuan": {
+      ".read": true,
+      ".write": true,
+      "$pengajuanId": {
+        ".validate": "newData.exists() ? newData.hasChildren(['nama', 'nik', 'alamat', 'lembaga', 'timestamp']) : true"
+      }
+    }
+  }
+}
+

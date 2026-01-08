@@ -1,13 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {
-  Box,
-  VStack,
-  HStack,
-  Text,
-  Heading,
-  ScrollView,
-  Pressable,
-} from '@gluestack-ui/themed';
+import { ScrollView, View, StyleSheet, TouchableOpacity, Text } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
@@ -32,33 +24,27 @@ const LembagaScreen = () => {
   };
 
   return (
-    <Box flex={1}>
+    <View style={{ flex: 1 }}>
       <StatusBar style="light" />
       <LinearGradient
         colors={[AppColors.backgroundBlue, AppColors.primaryDark]}
         style={{ flex: 1 }}
       >
-        <ScrollView flex={1}>
-          <Box px="$5" pt="$16" pb="$10">
-            {}
-            <HStack alignItems="center" mb="$6">
-              <Pressable onPress={() => router.back()} mr="$4">
-                <Text fontSize="$2xl" color="$white">
-                  
-                </Text>
-              </Pressable>
-              <VStack flex={1}>
-                <Heading size="2xl" color="$white">
-                  Daftar Lembaga Rehab
-                </Heading>
-                <Text fontSize="$sm" color="$white" mt="$1">
+        <ScrollView>
+          <View style={styles.container}>
+            <View style={styles.header}>
+              <TouchableOpacity onPress={() => router.back()} style={styles.backButton}>
+                <Text style={styles.backText}>←</Text>
+              </TouchableOpacity>
+              <View style={styles.headerContent}>
+                <Text style={styles.title}>Daftar Lembaga Rehab</Text>
+                <Text style={styles.subtitle}>
                   {lembagaList.length} Lembaga Terdaftar
                 </Text>
-              </VStack>
-            </HStack>
+              </View>
+            </View>
 
-            {}
-            <VStack space="md">
+            <View style={styles.listContainer}>
               {lembagaList.map((lembaga) => (
                 <LembagaCard
                   key={lembaga.id}
@@ -69,12 +55,47 @@ const LembagaScreen = () => {
                   onPress={() => handleLembagaPress(lembaga)}
                 />
               ))}
-            </VStack>
-          </Box>
+            </View>
+          </View>
         </ScrollView>
       </LinearGradient>
-    </Box>
+    </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    padding: 16,
+  },
+  header: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 16,
+  },
+  backButton: {
+    padding: 8,
+  },
+  backText: {
+    color: 'white',
+    fontSize: 32,
+  },
+  headerContent: {
+    flex: 1,
+    marginLeft: 8,
+  },
+  title: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    color: 'white',
+  },
+  subtitle: {
+    fontSize: 14,
+    color: 'white',
+    marginTop: 4,
+  },
+  listContainer: {
+    gap: 12,
+  },
+});
 
 export default LembagaScreen;
