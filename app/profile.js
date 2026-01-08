@@ -96,7 +96,7 @@ const ProfileScreen = () => {
     {
       key: 'security',
       title: 'Keamanan',
-      subtitle: 'Ubah kata sandi',
+      subtitle: 'Ubah Kata Sandi',
       icon: 'shield-checkmark-outline',
       onPress: handleChangePassword,
     },
@@ -381,3 +381,5 @@ const styles = StyleSheet.create({
 });
 
 export default ProfileScreen;
+
+
